@@ -47,11 +47,13 @@ class Application {
     })
   }
   createRoutes() {
+    const { AllRouters } = require('./router/index.routes')
     this.#app.get('/', (req, res, next) => {
       res.json({
         message: 'this is new express app',
       })
     })
+    this.#app.use(AllRouters)
   }
 }
 

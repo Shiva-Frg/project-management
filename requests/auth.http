@@ -1,0 +1,12 @@
+### register request
+
+Post http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "shiva_foroughan",
+    "email": "shiva@gmail.com",
+    "mobile": "09172173418",
+    "password": "123456",
+    "confirm_password": "123456"
+}
