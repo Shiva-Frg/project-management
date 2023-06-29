@@ -2,3 +2,15 @@
 
 http://localhost:3000/user/profile
 Authorization: Bearer {{$dotenv TOKEN}}
+
+### update profile
+
+PUT http://localhost:3000/user/profile
+Authorization: Bearer {{$dotenv TOKEN}}
+Content-Type: application/json
+
+{
+    "first_name": "shiva",
+    "last_name": "foroughan",
+    "skills": ["JS", "nodeJs"]
+}
