@@ -30,7 +30,7 @@ const registerValidator = () => [
     }),
   body('password')
     .isLength({ min: 6, max: 12 })
-    .withMessage('password must have 6 to 12 characters')
+    .withMessage('password must be between 6 and 12 characters')
     .custom((value, { req }) => {
       if (!value) throw 'password is required'
       if (value !== req.body.confirm_password) throw 'passwords is not match'
@@ -38,6 +38,21 @@ const registerValidator = () => [
     }),
 ]
 
+const loginValidator = () => [
+  body('username')
+    .notEmpty()
+    .withMessage('username can not be empty!')
+    .custom((username) => {
+      const userNameRegex = /^[a-z]+[a-z0-9\_\.]{2,}/gi
+      if (!userNameRegex.test(username)) throw 'username is not valid!'
+      return true
+    }),
+  body('password')
+    .isLength({ min: 6, max: 12 })
+    .withMessage('password must be between 6 and 12 characters'),
+]
+
 module.exports = {
   registerValidator,
+  loginValidator,
 }

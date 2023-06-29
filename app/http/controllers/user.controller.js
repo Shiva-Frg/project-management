@@ -1,5 +1,16 @@
 class UserController {
-  getProfile() {}
+  getProfile(req, res, next) {
+    try {
+      const user = req.user
+      res.status(200).json({
+        status: res.statusCode,
+        success: true,
+        user,
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
   editProfile() {}
   addSkills() {}
   editSkills() {}

@@ -1,0 +1,4 @@
+### get profile
+
+http://localhost:3000/user/profile
+Authorization: Bearer {{$dotenv TOKEN}}
