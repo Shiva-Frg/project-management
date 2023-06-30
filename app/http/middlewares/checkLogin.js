@@ -11,7 +11,6 @@ const checkLogin = async (req, res, next) => {
       throw { status: 401, message: 'please login!' }
 
     const { username } = verifyToken(token)
-    if (!username) throw { status: 401, message: 'please login!' }
 
     const foundedUser = await userModel.findOne({ username }, { password: 0 })
     if (!foundedUser) throw { status: 401, message: 'please login!' }

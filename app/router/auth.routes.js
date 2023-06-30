@@ -14,7 +14,12 @@ router.post(
   expressValidatorMapper,
   AuthController.register
 )
-router.post('/login', loginValidator(), AuthController.login)
+router.post(
+  '/login',
+  loginValidator(),
+  expressValidatorMapper,
+  AuthController.login
+)
 
 module.exports = {
   authRouters: router,

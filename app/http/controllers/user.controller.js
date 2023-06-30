@@ -1,9 +1,13 @@
 const { userModel } = require('../../models/user.model')
-
+const path = require('path')
 class UserController {
   getProfile(req, res, next) {
     try {
       const user = req.user
+
+      user.profile_image =
+        req.protocol + '://' + req.get('host') + '/' + user.profile_image
+
       res.status(200).json({
         status: res.statusCode,
         success: true,
@@ -32,6 +36,28 @@ class UserController {
       }
 
       throw { status: 400, message: 'can not update user!' }
+    } catch (error) {
+      next(error)
+    }
+  }
+  async uploadProfileImage(req, res, next) {
+    try {
+      const userId = req.user._id
+      const filePath = req.file?.path?.substring(7)
+
+      const updateUser = await userModel.updateOne(
+        { _id: userId },
+        { $set: { profile_image: filePath } }
+      )
+
+      if (updateUser.modifiedCount === 0)
+        throw { status: '400', message: 'can not update' }
+
+      res.status(200).json({
+        status: res.statusCode,
+        success: true,
+        message: 'user updated succesfully!',
+      })
     } catch (error) {
       next(error)
     }
