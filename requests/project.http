@@ -1,0 +1,26 @@
+### create project
+
+POST  http://localhost:3000/project/create
+Authorization: Bearer {{$dotenv TOKEN}}
+Content-Type: application/json
+
+{
+    "title": "project title",
+    "text": "this is a text for new proejct of this node js app"
+}
+
+### get all projects
+
+GET   http://localhost:3000/project/64a93e5d88ee1d79b26c185a
+Authorization: Bearer {{$dotenv TOKEN}}
+
+### update project
+
+PUT   http://localhost:3000/project/64a93e5d88ee1d79b26c185a
+Authorization: Bearer {{$dotenv TOKEN}}
+Content-Type: application/json
+
+{
+    "title": "project title 2",
+    "text": "this is a text for new sencond project of this node js app"
+}

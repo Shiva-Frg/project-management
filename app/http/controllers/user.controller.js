@@ -1,12 +1,12 @@
 const { userModel } = require('../../models/user.model')
 const path = require('path')
+const { createFileLink } = require('../../modules/fileHelper')
 class UserController {
   getProfile(req, res, next) {
     try {
       const user = req.user
 
-      user.profile_image =
-        req.protocol + '://' + req.get('host') + '/' + user.profile_image
+      user.profile_image = createFileLink(user.profile_image)
 
       res.status(200).json({
         status: res.statusCode,
@@ -43,7 +43,7 @@ class UserController {
   async uploadProfileImage(req, res, next) {
     try {
       const userId = req.user._id
-      const filePath = req.file?.path?.substring(7)
+      const filePath = req.file?.path?.substring(6)
 
       const updateUser = await userModel.updateOne(
         { _id: userId },
